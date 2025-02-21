@@ -105,6 +105,14 @@ const w30 = SizedBox(width: 30);
 
 const w40 = SizedBox(width: 40);
 
+
+const w50 = SizedBox(width: 50);
+
+const w60 = SizedBox(width: 60);
+
+const w100 = SizedBox(width: 100);
+
+
 const kwidth = SizedBox(width: 10);
 
 const appBarTitleStyle = TextStyle(

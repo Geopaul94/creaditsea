@@ -11,10 +11,9 @@ import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-class ONbordingScreenTwo extends StatelessWidget {
-  ONbordingScreenTwo({super.key});
+class ONbordingScreenThree extends StatelessWidget {
+  ONbordingScreenThree({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +23,19 @@ class ONbordingScreenTwo extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-          
             children: [
               h30,
-              Center(child: Row(mainAxisAlignment: MainAxisAlignment.center,
+              Center(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Headlinewithimage(),
                 ],
-              )),h30,
+              )),
+              h30,
               IconBigContainer(
-                centerImage: 'assets/images/secondscreenOnbordingImageIcon.png',
-         //       sideImage: 'assets/images/secondscreenOnbordingImageIcon.png',
+                centerImage: 'assets/images/thirdscreen_agent.png',
+            
               ),
               CustomText(
                 text: 'Instant Loan Approval ',
@@ -49,7 +50,7 @@ class ONbordingScreenTwo extends StatelessWidget {
                 fontSize: 14.sp,
               ),
               h40,
-              ONbordingScreenTwoContainer(),
+              ONbordingScreenThreeContainer(),
             ],
           ),
         ),
@@ -58,8 +59,8 @@ class ONbordingScreenTwo extends StatelessWidget {
   }
 }
 
-class ONbordingScreenTwoContainer extends StatelessWidget {
-  ONbordingScreenTwoContainer({super.key});
+class ONbordingScreenThreeContainer extends StatelessWidget {
+  ONbordingScreenThreeContainer({super.key});
 
   final OtpController otpController = Get.put(OtpController());
 

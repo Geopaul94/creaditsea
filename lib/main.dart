@@ -1,4 +1,5 @@
 
+import 'package:creditsea/presentation/screens/onboarding_screens/onBoarding_page_three.dart';
 import 'package:creditsea/presentation/screens/onboarding_screens/onboarding_screen_two.dart';
 import 'package:creditsea/presentation/screens/splash_screen.dart';
 import 'package:creditsea/presentation/screens/ss.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: ONbordingScreenTwo(),
+          home: ONbordingScreenThree(),
         );
       },
     );

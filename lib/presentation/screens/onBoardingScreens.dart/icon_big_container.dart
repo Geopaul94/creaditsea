@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 
 class IconBigContainer extends StatelessWidget {
   final String centerImage; // Change type to String
-  final String sideImage; // Change type to String
+  // final String sideImage; // Change type to String
 
-  const IconBigContainer({
+  const   IconBigContainer({
     super.key,
     required this.centerImage, // Make it required
-    required this.sideImage, // Make it required
+   // required this.sideImage, // Make it required
   });
 
   @override
