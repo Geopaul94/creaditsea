@@ -93,10 +93,10 @@ const h50 = SizedBox(height: 50);
 const h80 = SizedBox(height: 80);
 
 const h100 = SizedBox(height: 100);
-
+const h150 = SizedBox(height: 150);
 
 // SizedBox for widths
-
+const w5 = SizedBox(width: 5);
 const w10 = SizedBox(width: 10);
 
 const w20 = SizedBox(width: 20);

@@ -7,7 +7,7 @@ class CustomTextFormField extends StatefulWidget {
   final IconData? icon;
   final TextEditingController controller;
   final Color errorTextColor;
-  final bool obscureText;
+
   final FormFieldValidator<String>? validator;
   final String? hintText;
   final TextInputType keyboardType;
@@ -29,7 +29,7 @@ class CustomTextFormField extends StatefulWidget {
     required this.labelText,
      this.icon,
     required this.controller,
-    this.obscureText = false,
+  
     this.validator,
     this.hintText,
     this.keyboardType = TextInputType.text,
@@ -57,10 +57,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _obscureText = true;
 
   @override
-  void initState() {
-    super.initState();
-    _obscureText = widget.obscureText;
-  }
 
   String? _validateWordCount(String? value) {
     if (widget.maxWordCount != null && value != null) {
@@ -81,7 +77,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         readOnly: widget.readOnly ?? false, // Handle readOnly if provided
         onTap: widget.onTap,
         controller: widget.controller,
-        obscureText: _obscureText,
+      
         keyboardType: widget.keyboardType,
         maxLines: widget.maxLines,
         minLines: widget.minLines,
@@ -90,19 +86,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           contentPadding: const EdgeInsets.symmetric(
               vertical: 12.0,
               horizontal: 8.0), // Padding for better appearance
-          prefixIcon: Icon(widget.icon),
-          suffixIcon: widget.obscureText
-              ? IconButton(
-                  icon: Icon(
-                    _obscureText ? Icons.visibility : Icons.visibility_off,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _obscureText = !_obscureText;
-                    });
-                  },
-                )
-              : null,
+        
           errorStyle: TextStyle(color: widget.errorTextColor),
           hintText: widget.hintText,
           hintStyle: TextStyle(

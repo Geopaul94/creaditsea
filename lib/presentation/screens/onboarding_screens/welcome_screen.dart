@@ -1,6 +1,7 @@
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/headline_with_image.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/icon_container.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/tick_container.dart';
+import 'package:creditsea/presentation/screens/onboarding_screens/signin_screen.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
 import 'package:creditsea/presentation/widgets/custometextformfield.dart';
@@ -212,7 +213,13 @@ class _WelcomeScreenContainerState extends State<WelcomeScreenContainer> {
                       color: PrimaryColor,
                       fontWeight: FontWeight.bold,
                     ),
-                    GestureDetector(
+                    GestureDetector(     onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SigninScreen()),
+                          );
+                        },
                         child: CustomText(
                       text: 'Sign in',
                       color: PrimaryColor,

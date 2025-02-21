@@ -4,13 +4,16 @@ class CustomPasswordTextformField extends StatefulWidget {
   final TextEditingController controller;
   final String labelText;
 
-  const CustomPasswordTextformField({super.key, required this.controller, required this.labelText});
+  const CustomPasswordTextformField(
+      {super.key, required this.controller, required this.labelText});
 
   @override
-  _CustomPasswordTextformFieldState createState() => _CustomPasswordTextformFieldState();
+  _CustomPasswordTextformFieldState createState() =>
+      _CustomPasswordTextformFieldState();
 }
 
-class _CustomPasswordTextformFieldState extends State<CustomPasswordTextformField> {
+class _CustomPasswordTextformFieldState
+    extends State<CustomPasswordTextformField> {
   bool _obscureText = true;
 
   void _togglePasswordVisibility() {
@@ -25,10 +28,10 @@ class _CustomPasswordTextformFieldState extends State<CustomPasswordTextformFiel
       controller: widget.controller,
       obscureText: _obscureText,
       decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.lock),
+        //    prefixIcon: const Icon(Icons.lock),
         suffixIcon: IconButton(
           icon: Icon(
-            _obscureText ? Icons.visibility : Icons.visibility_off,
+            _obscureText ? Icons.visibility_off : Icons.visibility,
           ),
           onPressed: _togglePasswordVisibility,
         ),

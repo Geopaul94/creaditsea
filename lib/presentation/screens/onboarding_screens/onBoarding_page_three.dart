@@ -1,11 +1,11 @@
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/headline_with_image.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/icon_big_container.dart';
-import 'package:creditsea/presentation/screens/onBoardingScreens.dart/icon_container.dart';
-import 'package:creditsea/presentation/screens/onBoardingScreens.dart/tick_container.dart';
 import 'package:creditsea/presentation/screens/onboarding_screens/otpcontroller.dart';
 import 'package:creditsea/presentation/screens/onboarding_screens/welcome_screen.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
+import 'package:creditsea/presentation/widgets/customepassword.dart';
+import 'package:creditsea/presentation/widgets/custometextformfield.dart';
 
 import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ONbordingScreenThree extends StatelessWidget {
-  ONbordingScreenThree({super.key});
+  const ONbordingScreenThree({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +35,15 @@ class ONbordingScreenThree extends StatelessWidget {
               h30,
               IconBigContainer(
                 centerImage: 'assets/images/thirdscreen_agent.png',
-            
               ),
               CustomText(
-                text: 'Instant Loan Approval ',
+                text: '24*7 Customer Care ',
                 color: white,
                 fontWeight: FontWeight.w600,
                 fontSize: 18.sp,
               ),
               CustomText(
-                text: 'Users will receive approval within minutes  ',
+                text: 'Dedicated Customer Support team  ',
                 color: white,
                 fontWeight: FontWeight.w300,
                 fontSize: 14.sp,
@@ -60,6 +59,11 @@ class ONbordingScreenThree extends StatelessWidget {
 }
 
 class ONbordingScreenThreeContainer extends StatelessWidget {
+  final TextEditingController _passwordController = TextEditingController();
+
+  final TextEditingController _confirmpasswordController =
+      TextEditingController();
+
   ONbordingScreenThreeContainer({super.key});
 
   final OtpController otpController = Get.put(OtpController());
@@ -116,64 +120,41 @@ class ONbordingScreenThreeContainer extends StatelessWidget {
                         );
                       },
                     ),
-                    w60,
+                    w40,
                     CustomText(
-                      text: "Enter OTP",
+                      text: "Create a password ",
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ],
                 ),
+                h10,  CustomText(
+                  text:
+                      'Enter password',
+                  color: black,
+                ),h5,
+                CustomPasswordTextformField(
+                    controller: _passwordController,
+                    labelText: 'Enter password '),
+                h10, CustomText(
+                  text:
+                      'Re enter password',
+                  color: black,
+                ),h5,
+                CustomPasswordTextformField(
+                    controller: _confirmpasswordController,
+                    labelText: 'Re enter password '),
                 h10,
                 CustomText(
-                  text: "Verify OTP, Sent on  +91 8800642354",
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
+                  text:
+                      '* your password must include at least 8 characters, inclusive of at least one specail character ',
+                  color: grey,
                 ),
-                h10,
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      OtpInput(otpController.fieldOne, true),
-                      w20,
-                      OtpInput(otpController.fieldTwo, false),
-                      w20,
-                      OtpInput(otpController.fieldThree, false),
-                      w20,
-                      OtpInput(otpController.fieldFour, false),
-                    ],
-                  ),
-                ),
-                h10,
-                Obx(() {
-                  if (otpController.seconds.value == -1) {
-                    // Show "Resend" when timer ends
-                    return GestureDetector(
-                      onTap: () {
-                        if (!otpController.isCountingDown.value) {
-                          otpController
-                              .resetCountdown(); // Reset countdown on tap
-                        }
-                      },
-                      child: Text(
-                        "Resend",
-                        style: TextStyle(fontSize: 18, color: Colors.blue),
-                      ),
-                    );
-                  } else {
-                    // Show the countdown timer
-                    return Text(
-                      "00:${otpController.seconds.value.toString().padLeft(2, '0')}",
-                      style: TextStyle(fontSize: 18),
-                    );
-                  }
-                }),
                 h20,
                 Center(
                   child: CustomElevatedButton(
                     width: double.infinity,
-                    text: 'Verify',
+                    text: 'Proceed',
                     onPressed: () {
                       otpController.verifyOtp();
                     },

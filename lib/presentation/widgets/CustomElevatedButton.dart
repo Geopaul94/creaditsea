@@ -76,9 +76,6 @@ import 'package:flutter/material.dart';
 //   }
 // }
 
-
-
-
 class CustomElevatedButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
@@ -130,7 +127,10 @@ class CustomElevatedButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            colors: [Color.fromARGB(255, 75, 146, 226), Color.fromARGB(195, 40, 116, 202)],
+            colors: [
+              Color.fromARGB(255, 75, 146, 226),
+              Color.fromARGB(195, 40, 116, 202)
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -147,8 +147,10 @@ class CustomElevatedButton extends StatelessWidget {
               vertical: paddingVertical ?? defaultPaddingVertical,
               horizontal: paddingHorizontal ?? defaultPaddingHorizontal,
             ),
-            backgroundColor: Colors.transparent, // Make button background transparent
-            shadowColor: Colors.transparent, // Remove shadow to keep gradient visible
+            backgroundColor:
+                Colors.transparent, // Make button background transparent
+            shadowColor:
+                Colors.transparent, // Remove shadow to keep gradient visible
           ),
           onPressed: onPressed,
           child: Text(

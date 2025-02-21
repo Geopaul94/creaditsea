@@ -24,17 +24,19 @@ class ONbordingScreenTwo extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-          
             children: [
               h30,
-              Center(child: Row(mainAxisAlignment: MainAxisAlignment.center,
+              Center(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Headlinewithimage(),
                 ],
-              )),h30,
+              )),
+              h30,
               IconBigContainer(
                 centerImage: 'assets/images/secondscreenOnbordingImageIcon.png',
-         //       sideImage: 'assets/images/secondscreenOnbordingImageIcon.png',
+                //       sideImage: 'assets/images/secondscreenOnbordingImageIcon.png',
               ),
               CustomText(
                 text: 'Instant Loan Approval ',
