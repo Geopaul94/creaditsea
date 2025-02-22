@@ -1,8 +1,9 @@
+import 'package:creditsea/presentation/getx/personlaDetailController.dart';
 import 'package:creditsea/presentation/sample/s.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/calender_textform_field.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/date_picker_controller.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/gender_select_controller.dart';
-import 'package:creditsea/presentation/screens/personal_details.dart/material_status.dart';
+import 'package:creditsea/presentation/screens/personal_details.dart/marital_status.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
 import 'package:creditsea/presentation/widgets/custometextformfield.dart';
@@ -14,11 +15,15 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:intl/intl.dart';
 
+String SignInPhoneNumber = '';
+
 class PersonalDetails extends StatelessWidget {
-  const PersonalDetails({super.key});
+  final String phoneNumber;
+  const PersonalDetails({super.key, required this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
+    SignInPhoneNumber = phoneNumber;
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -27,7 +32,6 @@ class PersonalDetails extends StatelessWidget {
             Row(
               children: [CustomText(text: 'text')],
             ),
-
             h50,
             PersonalDetailsContainer()
           ],
@@ -37,36 +41,24 @@ class PersonalDetails extends StatelessWidget {
   }
 }
 
-class PersonalDetailsContainer extends StatefulWidget {
-  const PersonalDetailsContainer({super.key});
+class PersonalDetailsContainer extends StatelessWidget {
+  PersonalDetailsContainer({super.key});
 
-  @override
-  _PersonalDetailsContainerState createState() =>
-      _PersonalDetailsContainerState();
-}
-
-class _PersonalDetailsContainerState extends State<PersonalDetailsContainer> {
-  final TextEditingController _firstnamecontroller = TextEditingController();
-  final TextEditingController _lastnamecontroller = TextEditingController();
-  final TextEditingController _gendercontroller = TextEditingController();
-  final TextEditingController _dateofbirthcontroller = TextEditingController();
-  final TextEditingController _materialStatuscontroller =
-      TextEditingController();
-
-  @override
-  void dispose() {
-    _firstnamecontroller.dispose();
-    _lastnamecontroller.dispose();
-    _gendercontroller.dispose();
-    _dateofbirthcontroller.dispose();
-    _materialStatuscontroller.dispose();
-    super.dispose();
-  }
+  // Initialize controllers
+  final GenderController genderController = Get.put(GenderController());
+  final MaritalController maritalController = Get.put(MaritalController());
+  final DatePickerController datePickerController =
+      Get.put(DatePickerController());
 
   @override
   Widget build(BuildContext context) {
-    final DatePickerController datePickerController =
-        Get.put(DatePickerController());
+    final PersonalDetailsController personalDetailsController =
+        Get.put(PersonalDetailsController(
+      genderController: genderController,
+      maritalController: maritalController,
+      datePickerController: datePickerController,
+    ));
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -116,7 +108,7 @@ class _PersonalDetailsContainerState extends State<PersonalDetailsContainer> {
                     ),
                     CustomTextFormField(
                       labelText: 'Your first name',
-                      controller: _firstnamecontroller,
+                      controller: personalDetailsController.firstNameController,
                     ),
                   ],
                 ),
@@ -132,7 +124,7 @@ class _PersonalDetailsContainerState extends State<PersonalDetailsContainer> {
                     ),
                     CustomTextFormField(
                       labelText: 'Your last name ',
-                      controller: _lastnamecontroller,
+                      controller: personalDetailsController.lastNameController,
                     ),
                   ],
                 ),
@@ -144,9 +136,8 @@ class _PersonalDetailsContainerState extends State<PersonalDetailsContainer> {
             text: 'Gender*',
             fontWeight: FontWeight.w600,
           ),
-        
           h10,
-       CustomGenderFormField(),
+          CustomGenderFormField(),
           const SizedBox(height: 20),
           CustomText(
             text: 'Marital Status*',
@@ -157,31 +148,26 @@ class _PersonalDetailsContainerState extends State<PersonalDetailsContainer> {
           h20,
           CalendarTextField(),
           h100,
-          Row(mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomElevatedButton(
-                borderRadius: 10,height: 50.h,fontSize: 20.sp,
-                text: 'Continue',
-                onPressed: () {
-                  if (datePickerController.isDateSelected()) {
-                    // Date is selected, proceed with your logic
-                    print(
-                        'Selected Date: ${datePickerController.selectedDate.value}');
-                    // Add your code here to process the selected date
-                  } else {
-                    // Date is not selected, show an error
-                    Get.snackbar(
-                      'Error',
-                      'Please select a date of birth.',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.red,
-                      colorText: Colors.white,
-                    );
-                  }
-                },
-              ),
-            ],
-          ),h150,
+          Obx(() {
+            return personalDetailsController.isLoading.value
+                ? const Center(child: CircularProgressIndicator())
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomElevatedButton(
+                        borderRadius: 10,
+                        height: 50,
+                        fontSize: 20,
+                        text: 'Continue',
+                        onPressed: () {
+                          personalDetailsController
+                              .updatePersonalDetails(context);
+                        },
+                      ),
+                    ],
+                  );
+          }),
+          h150,
         ],
       ),
     );

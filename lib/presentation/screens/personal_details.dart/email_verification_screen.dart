@@ -1,20 +1,8 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import 'package:creditsea/presentation/screens/onboarding_screens/otpcontroller.dart';
+import 'package:creditsea/presentation/getx/email_controller.dart';
+import 'package:creditsea/presentation/getx/emailotp_controller.dart';
+import 'package:creditsea/presentation/getx/otp_timer/otpcontroller.dart';
+import 'package:creditsea/presentation/screens/onboarding_screen_two/onboarding_screen_two.dart';
+import 'package:creditsea/presentation/screens/personal_details.dart/personal_details.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
 import 'package:creditsea/presentation/widgets/custometextformfield.dart';
@@ -46,25 +34,11 @@ class EmailVerificationScreen extends StatelessWidget {
   }
 }
 
-class EmailVerificationScreenContainer extends StatefulWidget {
-  const EmailVerificationScreenContainer({super.key});
+class EmailVerificationScreenContainer extends StatelessWidget {
+  EmailVerificationScreenContainer({super.key});
 
-  @override
-  _EmailVerificationScreenContainerState createState() =>
-      _EmailVerificationScreenContainerState();
-}
-
-class _EmailVerificationScreenContainerState
-    extends State<EmailVerificationScreenContainer> {
-  final TextEditingController _emailcontroller = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailcontroller.dispose();
-
-    super.dispose();
-  }
-
+  final EmailController emailController = Get.put(EmailController());
+  final EmailotpController emailotpController = Get.put(EmailotpController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -124,26 +98,42 @@ class _EmailVerificationScreenContainerState
                 h10,
                 CustomTextFormField(
                   labelText: 'Enter your email ID',
-                  controller: _emailcontroller,
+                  controller: emailController.emailController,
                 ),
+                h20,
+                Obx(() {
+                  return emailController.isLoading.value
+                      ? const Center(child: CircularProgressIndicator())
+                      : CustomElevatedButton(
+                          paddingHorizontal: 4,
+                          paddingVertical: 2,
+                          borderRadius: 10,
+                          height: 35.h,
+                          fontSize: 14.sp,
+                          text: 'Request OTP',
+                          onPressed: () {
+                            emailController.requestOTP(context);
+                          },
+                        );
+                }),
               ],
             ),
           ),
-          ONbordingScreenTwoContainer(),
+          EmailOTPVerificationContainer(),
         ],
       ),
     );
   }
 }
 
-class ONbordingScreenTwoContainer extends StatelessWidget {
-  ONbordingScreenTwoContainer({super.key});
+class EmailOTPVerificationContainer extends StatelessWidget {
+  EmailOTPVerificationContainer({super.key});
 
-  final OtpController otpController = Get.put(OtpController());
-
+  final EmailController emailController = Get.put(EmailController());
+  final EmailotpController emailotpController = Get.put(EmailotpController());
   @override
   Widget build(BuildContext context) {
-    otpController.startCountdown();
+    emailotpController.startCountdown();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -158,28 +148,26 @@ class ONbordingScreenTwoContainer extends StatelessWidget {
             fontWeight: FontWeight.w400,
           ),
           h10,
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                OtpInput(otpController.fieldOne, true),
-                w20,
-                OtpInput(otpController.fieldTwo, false),
-                w20,
-                OtpInput(otpController.fieldThree, false),
-                w20,
-                OtpInput(otpController.fieldFour, false),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              OtpInput(emailotpController.fieldOne, true),
+              OtpInput(emailotpController.fieldTwo, false),
+              OtpInput(emailotpController.fieldThree, false),
+              OtpInput(emailotpController.fieldFour, false),
+              OtpInput(emailotpController.fieldFive, false),
+              OtpInput(emailotpController.fieldSix, false),
+            ],
           ),
           h10,
           Obx(() {
-            if (otpController.seconds.value == -1) {
+            if (emailotpController.seconds.value == -1) {
               // Show "Resend" when timer ends
               return GestureDetector(
                 onTap: () {
-                  if (!otpController.isCountingDown.value) {
-                    otpController.resetCountdown(); // Reset countdown on tap
+                  if (!emailotpController.isCountingDown.value) {
+                    emailotpController
+                        .resetCountdown(); // Reset countdown on tap
                   }
                 },
                 child: Row(
@@ -199,56 +187,26 @@ class ONbordingScreenTwoContainer extends StatelessWidget {
             } else {
               // Show the countdown timer
               return Text(
-                "00:${otpController.seconds.value.toString().padLeft(2, '0')}",
+                "00:${emailotpController.seconds.value.toString().padLeft(2, '0')}",
                 style: TextStyle(fontSize: 18),
               );
             }
           }),
-          h100,
+          h50,
+          h20,
           Center(
             child: CustomElevatedButton(
               borderRadius: 10,
               height: 50.h,
               fontSize: 20.sp,
-              text: 'Continue',
+              text: 'Verify',
               onPressed: () {
-                otpController.verifyOtp();
+                emailotpController.verifyOtp(context);
               },
             ),
           ),
           h40,
         ],
-      ),
-    );
-  }
-}
-
-class OtpInput extends StatelessWidget {
-  final TextEditingController controller;
-  final bool autoFocus;
-  const OtpInput(this.controller, this.autoFocus, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      width: 50,
-      child: TextField(
-        autofocus: autoFocus,
-        textAlign: TextAlign.center,
-        keyboardType: TextInputType.number,
-        controller: controller,
-        maxLength: 1,
-        cursorColor: Theme.of(context).primaryColor,
-        decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            counterText: '',
-            hintStyle: TextStyle(color: Colors.black, fontSize: 20.0)),
-        onChanged: (value) {
-          if (value.length == 1) {
-            FocusScope.of(context).nextFocus();
-          }
-        },
       ),
     );
   }

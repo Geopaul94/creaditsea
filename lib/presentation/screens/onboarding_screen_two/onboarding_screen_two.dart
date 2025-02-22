@@ -1,19 +1,19 @@
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/headline_with_image.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/icon_big_container.dart';
-import 'package:creditsea/presentation/screens/onboarding_screens/otpcontroller.dart';
-import 'package:creditsea/presentation/screens/onboarding_screens/welcome_screen.dart';
+import 'package:creditsea/presentation/getx/otp_timer/otpcontroller.dart';
+
+import 'package:creditsea/presentation/screens/onboarding_screen_two/welcome_screen.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
-import 'package:creditsea/presentation/widgets/customepassword.dart';
-import 'package:creditsea/presentation/widgets/custometextformfield.dart';
 
 import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class ONbordingScreenThree extends StatelessWidget {
-  const ONbordingScreenThree({super.key});
+class ONbordingScreenTwo extends StatelessWidget {
+  final String phonenumber;
+  const ONbordingScreenTwo({super.key, required this.phonenumber});
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +34,24 @@ class ONbordingScreenThree extends StatelessWidget {
               )),
               h30,
               IconBigContainer(
-                centerImage: 'assets/images/thirdscreen_agent.png',
+                centerImage: 'assets/images/secondscreenOnbordingImageIcon.png',
               ),
               CustomText(
-                text: '24*7 Customer Care ',
+                text: 'Instant Loan Approval ',
                 color: white,
                 fontWeight: FontWeight.w600,
                 fontSize: 18.sp,
               ),
               CustomText(
-                text: 'Dedicated Customer Support team  ',
+                text: 'Users will receive approval within minutes  ',
                 color: white,
                 fontWeight: FontWeight.w300,
                 fontSize: 14.sp,
               ),
               h40,
-              ONbordingScreenThreeContainer(),
+              ONbordingScreenTwoContainer(
+                phonenumber: phonenumber,
+              ),
             ],
           ),
         ),
@@ -58,13 +60,9 @@ class ONbordingScreenThree extends StatelessWidget {
   }
 }
 
-class ONbordingScreenThreeContainer extends StatelessWidget {
-  final TextEditingController _passwordController = TextEditingController();
-
-  final TextEditingController _confirmpasswordController =
-      TextEditingController();
-
-  ONbordingScreenThreeContainer({super.key});
+class ONbordingScreenTwoContainer extends StatelessWidget {
+  final String phonenumber;
+  ONbordingScreenTwoContainer({super.key, required this.phonenumber});
 
   final OtpController otpController = Get.put(OtpController());
 
@@ -73,7 +71,6 @@ class ONbordingScreenThreeContainer extends StatelessWidget {
     otpController.startCountdown();
 
     final size = MediaQuery.of(context).size;
-    //   double availableHeight = size.height - 430;
 
     return SingleChildScrollView(
       child: Container(
@@ -120,43 +117,66 @@ class ONbordingScreenThreeContainer extends StatelessWidget {
                         );
                       },
                     ),
-                    w40,
+                    w60,
                     CustomText(
-                      text: "Create a password ",
+                      text: "Enter OTP",
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ],
                 ),
-                h10,  CustomText(
-                  text:
-                      'Enter password',
-                  color: black,
-                ),h5,
-                CustomPasswordTextformField(
-                    controller: _passwordController,
-                    labelText: 'Enter password '),
-                h10, CustomText(
-                  text:
-                      'Re enter password',
-                  color: black,
-                ),h5,
-                CustomPasswordTextformField(
-                    controller: _confirmpasswordController,
-                    labelText: 'Re enter password '),
                 h10,
                 CustomText(
-                  text:
-                      '* your password must include at least 8 characters, inclusive of at least one specail character ',
-                  color: grey,
+                  text: "Verify OTP, Sent on  +91 $phonenumber",
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w400,
                 ),
+                h10,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    OtpInput(otpController.fieldOne, true),
+                    OtpInput(otpController.fieldTwo, false),
+                    OtpInput(otpController.fieldThree, false),
+                    OtpInput(otpController.fieldFour, false),
+                    OtpInput(otpController.fieldFive, false),
+                    OtpInput(otpController.fieldSix, false),
+                  ],
+                ),
+                h10,
+                Obx(() {
+                  if (otpController.seconds.value == -1) {
+                    // Show "Resend" when timer ends
+                    return GestureDetector(
+                      onTap: () {
+                        if (!otpController.isCountingDown.value) {
+                          otpController
+                              .resetCountdown(); // Reset countdown on tap
+                        }
+                      },
+                      child: Text(
+                        "Resend",
+                        style: TextStyle(fontSize: 18, color: Colors.blue),
+                      ),
+                    );
+                  } else {
+                    // Show the countdown timer
+                    return Text(
+                      "00:${otpController.seconds.value.toString().padLeft(2, '0')}",
+                      style: TextStyle(fontSize: 18),
+                    );
+                  }
+                }),
                 h20,
                 Center(
                   child: CustomElevatedButton(
                     width: double.infinity,
-                    text: 'Proceed',
+                    text: 'Verify',
                     onPressed: () {
-                      otpController.verifyOtp();
+                      otpController.verifyOtp(context,phonenumber);
+
+
+                      
                     },
                   ),
                 ),
@@ -173,6 +193,7 @@ class ONbordingScreenThreeContainer extends StatelessWidget {
 class OtpInput extends StatelessWidget {
   final TextEditingController controller;
   final bool autoFocus;
+
   const OtpInput(this.controller, this.autoFocus, {super.key});
 
   @override
@@ -188,12 +209,13 @@ class OtpInput extends StatelessWidget {
         maxLength: 1,
         cursorColor: Theme.of(context).primaryColor,
         decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            counterText: '',
-            hintStyle: TextStyle(color: Colors.black, fontSize: 20.0)),
+          border: OutlineInputBorder(),
+          counterText: '',
+          hintStyle: TextStyle(color: Colors.black, fontSize: 20.0),
+        ),
         onChanged: (value) {
-          if (value.length == 1) {
-            FocusScope.of(context).nextFocus();
+          if (value.isNotEmpty) {
+            FocusScope.of(context).nextFocus(); // Move focus to the next field
           }
         },
       ),

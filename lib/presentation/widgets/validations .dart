@@ -10,6 +10,32 @@ String? validateEmail(String? email) {
   return null;
 }
 
+
+
+
+
+// pancard validation
+String? validatePanCard(String? panCardNumber) {
+  if (panCardNumber == null || panCardNumber.isEmpty) {
+    return 'PAN card number cannot be empty.';
+  }
+
+  // Regular expression for PAN card validation
+  final RegExp panRegExp = RegExp(r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$');
+
+  // Check if the entered PAN card number matches the pattern
+  if (!panRegExp.hasMatch(panCardNumber)) {
+    return 'Please enter a valid PAN card number.';
+  }
+
+  return null; // Return null if the PAN is valid
+}
+
+
+
+
+
+
 // password validator
 String? validatePassword(String? password) {
   if (password == null || password.isEmpty) {

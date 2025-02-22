@@ -16,7 +16,6 @@ class DatePickerController extends GetxController {
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
     );
-
     if (pickedDate != null) {
       selectedDate.value = DateFormat('yyyy-MM-dd').format(pickedDate);
     }

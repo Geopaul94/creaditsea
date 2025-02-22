@@ -1,7 +1,7 @@
 import 'package:creditsea/data/models/userDetail.dart';
 import 'package:creditsea/main.dart';
-import 'package:creditsea/presentation/screens/onboarding_screens/onboarding_screen_two.dart';
-import 'package:creditsea/presentation/screens/onboarding_screens/welcome_screen.dart';
+import 'package:creditsea/presentation/screens/onboarding_screen_two/onboarding_screen_two.dart';
+import 'package:creditsea/presentation/screens/onboarding_screen_two/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -69,19 +69,19 @@ class UserController extends GetxController {
       isLoading(false);
     }
   }
+}
 
-  // Method to show snackbar with conditional background color
-  void showSnackBar(bool isError, String message) {
-    Get.snackbar(
-      isError ? 'Error' : 'Success', // Title changes based on error/success
-      message, // The message passed to the function
-      backgroundColor: isError
-          ? Colors.red
-          : Colors.blue, // Red for errors, blue for success
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM, // Display at the bottom
-      margin: const EdgeInsets.all(10),
-      borderRadius: 8,
-    );
-  }
+// Method to show snackbar with conditional background color
+void showSnackBar(bool isError, String message) {
+  Get.snackbar(
+    isError ? 'Error' : 'Success', // Title changes based on error/success
+    message, // The message passed to the function
+    backgroundColor:
+        isError ? Colors.red : Colors.blue, // Red for errors, blue for success
+    colorText: Colors.white,
+    snackPosition: SnackPosition.BOTTOM, // Display at the bottom
+    margin: const EdgeInsets.all(10),
+    borderRadius: 8,
+    duration: const Duration(seconds: 2),
+  );
 }

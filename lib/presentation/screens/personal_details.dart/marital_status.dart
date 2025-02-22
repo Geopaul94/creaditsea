@@ -1,4 +1,4 @@
-import 'package:creditsea/presentation/screens/personal_details.dart/material_status.dart';
+import 'package:creditsea/presentation/screens/personal_details.dart/marital_status.dart';
 import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,16 +11,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // Assuming you're using ScreenUtil for responsive design
 
-class MarrialController extends GetxController {
-  var selectedGender = ''.obs; // Observable string for selected gender
+class MaritalController extends GetxController {
+  var selectedMaritalStatus = ''.obs; // Observable string for marital status
 
-  void setGender(String gender) {
-    selectedGender.value = gender;
+  void setMaritalStatus(String status) {
+    selectedMaritalStatus.value = status;
   }
 }
 
+
+
+
+
+
+
 class CustomMaritalFormField extends StatelessWidget {
-  final MarrialController materialController = Get.put(MarrialController());
+  final MaritalController maritalController = Get.find<MaritalController>();
 
   CustomMaritalFormField({super.key});
 
@@ -29,15 +35,15 @@ class CustomMaritalFormField extends StatelessWidget {
     return Obx(() => TextFormField(
           readOnly: true,
           onTap: () {
-            _showMatrialSelection(context);
+            _showMaritalSelection(context);
           },
           decoration: InputDecoration(
-            labelText: materialController.selectedGender.value.isEmpty
-                ? 'Select '
-                : materialController.selectedGender.value,
+            labelText: maritalController.selectedMaritalStatus.value.isNotEmpty
+                ? maritalController.selectedMaritalStatus.value
+                : 'Select Marital Status',
             labelStyle: TextStyle(
               color: Colors.grey,
-              fontSize: 15.sp,
+              fontSize: 15,
             ),
             border: const OutlineInputBorder(),
             suffixIcon: const Icon(CupertinoIcons.chevron_down),
@@ -45,24 +51,24 @@ class CustomMaritalFormField extends StatelessWidget {
         ));
   }
 
-  void _showMatrialSelection(BuildContext context) {
+  void _showMaritalSelection(BuildContext context) {
     showCupertinoModalPopup(
       context: context,
       builder: (BuildContext builder) {
         return CupertinoActionSheet(
-          title: const Text('Select'),
+          title: const Text('Select Marital Status'),
           actions: <CupertinoActionSheetAction>[
             CupertinoActionSheetAction(
               child: const Text('Married'),
               onPressed: () {
-                materialController.setGender('Married');
+                maritalController.setMaritalStatus('Married');
                 Navigator.pop(context);
               },
             ),
             CupertinoActionSheetAction(
               child: const Text('Unmarried'),
               onPressed: () {
-                materialController.setGender('Unmarried');
+                maritalController.setMaritalStatus('Unmarried');
                 Navigator.pop(context);
               },
             ),

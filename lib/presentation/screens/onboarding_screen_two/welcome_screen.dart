@@ -2,12 +2,12 @@ import 'package:creditsea/presentation/getx/user_controller.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/headline_with_image.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/icon_container.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/tick_container.dart';
-import 'package:creditsea/presentation/screens/onboarding_screens/onboarding_screen_two.dart';
-import 'package:creditsea/presentation/screens/onboarding_screens/signin_screen.dart';
+import 'package:creditsea/presentation/screens/onboarding_screen_two/onboarding_screen_two.dart';
+import 'package:creditsea/presentation/screens/onboarding_screen_two/signin_screen.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
 import 'package:creditsea/presentation/widgets/custometextformfield.dart';
-import 'package:creditsea/presentation/widgets/validations%20copy.dart';
+import 'package:creditsea/presentation/widgets/validations%20.dart';
 import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,7 +64,7 @@ class WelcomeScreen extends StatelessWidget {
 }
 
 class WelcomeScreenContainer extends StatefulWidget {
-  WelcomeScreenContainer({super.key});
+  const WelcomeScreenContainer({super.key});
 
   @override
   State<WelcomeScreenContainer> createState() => _WelcomeScreenContainerState();

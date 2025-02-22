@@ -27,24 +27,8 @@ class PanNumberVerificationScreen extends StatelessWidget {
   }
 }
 
-class PanNumberVerificationScreenContainer extends StatefulWidget {
+class PanNumberVerificationScreenContainer extends StatelessWidget {
   const PanNumberVerificationScreenContainer({super.key});
-
-  @override
-  _PanNumberVerificationScreenContainerState createState() =>
-      _PanNumberVerificationScreenContainerState();
-}
-
-class _PanNumberVerificationScreenContainerState
-    extends State<PanNumberVerificationScreenContainer> {
-  final TextEditingController _PanNumbercontroller = TextEditingController();
-
-  @override
-  void dispose() {
-    _PanNumbercontroller.dispose();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +90,10 @@ class _PanNumberVerificationScreenContainerState
                   ],
                 ),
                 h20,
-                CustomTextFormField(
-                  labelText: 'Enter your PanNumber ID',
-                  controller: _PanNumbercontroller,
-                ),
+                // CustomTextFormField(
+                //   labelText: 'Enter your PanNumber ID',
+                //   controller: _PanNumbercontroller,
+                // ),
               ],
             ),
           ),

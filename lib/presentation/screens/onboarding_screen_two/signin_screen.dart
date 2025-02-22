@@ -1,8 +1,9 @@
+import 'package:creditsea/presentation/getx/signin_controller.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/headline_with_image.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/icon_big_container.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/icon_container.dart';
 import 'package:creditsea/presentation/screens/onBoardingScreens.dart/tick_container.dart';
-import 'package:creditsea/presentation/screens/onboarding_screens/welcome_screen.dart';
+import 'package:creditsea/presentation/screens/onboarding_screen_two/welcome_screen.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
 import 'package:creditsea/presentation/widgets/customepassword.dart';
@@ -10,6 +11,7 @@ import 'package:creditsea/presentation/widgets/custometextformfield.dart';
 import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});
@@ -65,14 +67,11 @@ class SigninScreenContainer extends StatefulWidget {
 }
 
 class _SigninScreenContainerState extends State<SigninScreenContainer> {
-  final TextEditingController _phonenumber = TextEditingController();
-  final TextEditingController _passwordcontoller = TextEditingController();
-
+  final SigninController _controller = Get.put(SigninController());
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    double availableHeight = size.height - 430; // Assuming top is at 430
-
+ 
     return SingleChildScrollView(
       child: Container(
         height: 500.h, // Set a specific height for visibility
@@ -134,7 +133,7 @@ class _SigninScreenContainerState extends State<SigninScreenContainer> {
                         child: Row(
                           children: [
                             Image.asset('assets/images/India.png'),
-                            SizedBox(width: 10), // Use SizedBox for spacing
+                           h10,
                             CustomText(text: '+91'),
                           ],
                         ),
@@ -142,11 +141,10 @@ class _SigninScreenContainerState extends State<SigninScreenContainer> {
                     ),
                     w10,
                     Expanded(
-                      child: CustomTextFormField(
-                        labelText: 'Phone Number', // Updated label
-                        controller: _phonenumber,
-                        // decoration: InputDecoration(
-                        //   border: OutlineInputBorder(),
+                      child: CustomTextFormField(keyboardType: TextInputType.phone,
+                        labelText: 'Phone Number',
+                        controller: _controller.phoneNumberController,
+                      
                         hintText: 'Please enter your mobile no',
                       ),
                     ),
@@ -155,20 +153,35 @@ class _SigninScreenContainerState extends State<SigninScreenContainer> {
                 h10,
 
                 CustomPasswordTextformField(
-                    controller: _passwordcontoller,
+                      controller: _controller.passwordController,
                     labelText: 'Enter password '),
 
                 h20,
-                Center(
-                    child: CustomElevatedButton(
-                        width: double.infinity,
-                        text: 'Sign in',
-                        onPressed: () {})),
-                    h5,    Row(
-                          children: [
-                           Spacer(), CustomText(text: 'Forgot passowrd ?',color: PrimaryColor,),
-                          ],
-                        ),
+                Obx(() {
+                  // Show loading indicator if isLoading is true
+                  return _controller.isLoading.value
+                      ? Center(child: CircularProgressIndicator())
+                      : Center(
+                          child: CustomElevatedButton(
+                            width: double.infinity,
+                            text: 'Sign in',
+                            onPressed: () {
+                              // Call the signIn method from the controller
+                              _controller.signIn(context);
+                            },
+                          ),
+                        );
+                }),
+                h5,
+                Row(
+                  children: [
+                    Spacer(),
+                    CustomText(
+                      text: 'Forgot password ?',
+                      color: PrimaryColor,
+                    ),
+                  ],
+                ),
 
                 h10,
                 Row(
@@ -193,7 +206,8 @@ class _SigninScreenContainerState extends State<SigninScreenContainer> {
                           fontWeight: FontWeight.bold,
                         )),
                   ],
-                ),h30,
+                ),
+                h30,
               ],
             ),
           ),

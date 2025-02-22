@@ -14,12 +14,8 @@ import 'package:intl/intl.dart';
 
 
 
-
-
-
 class CalendarTextField extends StatelessWidget {
-  final DatePickerController datePickerController =
-      Get.find<DatePickerController>();
+  final DatePickerController datePickerController = Get.find<DatePickerController>();
 
   CalendarTextField({super.key});
 
@@ -34,8 +30,8 @@ class CalendarTextField extends StatelessWidget {
             labelText: datePickerController.selectedDate.value.isNotEmpty
                 ? datePickerController.selectedDate.value
                 : 'Select Date of Birth',
-            suffixIcon: Icon(Icons.calendar_today),
-            border: OutlineInputBorder(),
+            suffixIcon: const Icon(Icons.calendar_today),
+            border: const OutlineInputBorder(),
           ),
         ));
   }
