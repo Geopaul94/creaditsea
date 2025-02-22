@@ -1,36 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:creditsea/data/models/userDetail.dart';
 import 'package:creditsea/presentation/getx/user_controller.dart';
+import 'package:creditsea/presentation/screens/applay_loan/applay_loan.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/personal_details.dart';
 import 'package:creditsea/presentation/widgets/validations%20.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-// pancard validation
-String? validatePanCard(String? panCardNumber) {
-  if (panCardNumber == null || panCardNumber.isEmpty) {
-    return 'PAN card number cannot be empty.';
-  }
-
-  // Regular expression for PAN card validation
-  final RegExp panRegExp = RegExp(r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$');
-
-  // Check if the entered PAN card number matches the pattern
-  if (!panRegExp.hasMatch(panCardNumber)) {
-    return 'Please enter a valid PAN card number.';
-  }
-
-  return null; // Return null if the PAN is valid
-}
 
 class PannumberController extends GetxController {
   final TextEditingController panNumberController = TextEditingController();
   var isLoading = false.obs;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Validate and update the email in Firestore
-  Future<void> requestOTP(BuildContext context) async {
-    final pancard = panNumberController.text.trim();
+  // Validate PAN card and update Firestore
+  Future<void> validateAndSavePanCard(BuildContext context) async {
+    final pancard = panNumberController.text.toUpperCase().trim();
+
+    // Validate PAN card number
+    final panError = validatePanCard(pancard);
+    if (panError != null) {
+      showSnackBar(true, panError);
+      return;
+    }
 
     // Start loading
     isLoading(true);
@@ -50,18 +41,21 @@ class PannumberController extends GetxController {
       // Get the document ID of the matching user
       final userId = querySnapshot.docs.first.id;
 
-      // Update the email in Firestore
+      // Update the PAN card number in Firestore
       await _firestore.collection('userDetails').doc(userId).update({
-        'pancard': pancard,
+        'panCard': pancard,
       });
 
       // Show success snackbar
-      showSnackBar(false, 'OTP sent to $pancard.');
+      showSnackBar(false, 'PAN card saved successfully!');
 
-      // Simulate OTP being sent (mock OTP is 123456)
-      print('Mock OTP sent: 123456');
+      // Navigate to the next screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ApplayLoanScreen()),
+      );
     } catch (e) {
-      showSnackBar(true, 'Pancard verificatin failed: $e');
+      showSnackBar(true, 'Failed to save PAN card: $e');
     } finally {
       isLoading(false);
     }

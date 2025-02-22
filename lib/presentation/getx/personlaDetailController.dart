@@ -9,14 +9,6 @@ import 'package:creditsea/presentation/screens/personal_details.dart/personal_de
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-
-
-
-
-
-
-
 class PersonalDetailsController extends GetxController {
   // Controllers for personal details
   final TextEditingController firstNameController = TextEditingController();
@@ -94,7 +86,10 @@ class PersonalDetailsController extends GetxController {
       final userId = querySnapshot.docs.first.id;
 
       // Update the personal details in the document
-      await FirebaseFirestore.instance.collection('userDetails').doc(userId).update({
+      await FirebaseFirestore.instance
+          .collection('userDetails')
+          .doc(userId)
+          .update({
         'firstName': firstNameController.text.trim(),
         'lastName': lastNameController.text.trim(),
         'gender': genderController.selectedGender.value,
@@ -107,7 +102,8 @@ class PersonalDetailsController extends GetxController {
       // Navigate to the next screen or perform other actions
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const EmailVerificationScreen()),
+        MaterialPageRoute(
+            builder: (context) => const EmailVerificationScreen()),
       );
     } catch (e) {
       // Show error snackbar
@@ -117,6 +113,4 @@ class PersonalDetailsController extends GetxController {
       isLoading(false);
     }
   }
-
-
 }

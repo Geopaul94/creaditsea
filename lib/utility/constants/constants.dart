@@ -94,6 +94,7 @@ const h80 = SizedBox(height: 80);
 
 const h100 = SizedBox(height: 100);
 const h150 = SizedBox(height: 150);
+const h250 = SizedBox(height: 250);
 
 // SizedBox for widths
 const w5 = SizedBox(width: 5);

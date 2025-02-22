@@ -1,6 +1,6 @@
-
 import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/services/text_formatter.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String labelText;
@@ -23,13 +23,12 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxWordCount; // Optional max word count
   final TextAlign textAlign; // Text alignment for the input text and hint text
   final bool? readOnly;
-  final GestureTapCallback? onTap; 
+  final GestureTapCallback? onTap;
   const CustomTextFormField({
     super.key,
     required this.labelText,
-     this.icon,
+    this.icon,
     required this.controller,
-  
     this.validator,
     this.hintText,
     this.keyboardType = TextInputType.text,
@@ -47,6 +46,7 @@ class CustomTextFormField extends StatefulWidget {
     this.textAlign = TextAlign.left,
     this.readOnly = false,
     this.onTap,
+    List<TextInputFormatter>? inputFormatters,
   });
 
   @override
@@ -54,10 +54,6 @@ class CustomTextFormField extends StatefulWidget {
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  bool _obscureText = true;
-
-  @override
-
   String? _validateWordCount(String? value) {
     if (widget.maxWordCount != null && value != null) {
       int wordCount = value.split(RegExp(r'\s+')).length;
@@ -77,16 +73,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         readOnly: widget.readOnly ?? false, // Handle readOnly if provided
         onTap: widget.onTap,
         controller: widget.controller,
-      
+
         keyboardType: widget.keyboardType,
         maxLines: widget.maxLines,
         minLines: widget.minLines,
         textAlign: widget.textAlign, // Apply the text alignment here
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(
-              vertical: 12.0,
-              horizontal: 8.0), // Padding for better appearance
-        
+              vertical: 12.0, horizontal: 8.0), // Padding for better appearance
+
           errorStyle: TextStyle(color: widget.errorTextColor),
           hintText: widget.hintText,
           hintStyle: TextStyle(

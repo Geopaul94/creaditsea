@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:creditsea/presentation/getx/user_controller.dart';
 import 'package:creditsea/presentation/screens/applay_loan/applay_loan.dart';
+import 'package:creditsea/presentation/screens/pan_number/pan_number_verificarion.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/date_picker_controller.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/email_verification_screen.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/gender_select_controller.dart';
@@ -74,7 +75,7 @@ class EmailotpController extends GetxController {
       showSnackBar(false, 'OTP verification successful!');
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const ApplayLoanScreen()),
+        MaterialPageRoute(builder: (context) => const PanNumberVerificationScreen()),
       );
     } else {
       // OTP is incorrect

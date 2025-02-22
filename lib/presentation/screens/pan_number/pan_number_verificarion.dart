@@ -1,9 +1,12 @@
+import 'package:creditsea/presentation/getx/panNumber_controller.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
 import 'package:creditsea/presentation/widgets/custometextformfield.dart';
 import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class PanNumberVerificationScreen extends StatelessWidget {
   const PanNumberVerificationScreen({super.key});
@@ -28,7 +31,9 @@ class PanNumberVerificationScreen extends StatelessWidget {
 }
 
 class PanNumberVerificationScreenContainer extends StatelessWidget {
-  const PanNumberVerificationScreenContainer({super.key});
+   PanNumberVerificationScreenContainer({super.key});
+
+  final PannumberController panController = Get.put(PannumberController());
 
   @override
   Widget build(BuildContext context) {
@@ -90,24 +95,31 @@ class PanNumberVerificationScreenContainer extends StatelessWidget {
                   ],
                 ),
                 h20,
-                // CustomTextFormField(
-                //   labelText: 'Enter your PanNumber ID',
-                //   controller: _PanNumbercontroller,
-                // ),
+                CustomTextFormField(
+                  labelText: 'Enter your PanNumber ID',
+               controller: panController.panNumberController,
+               inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[A-Z0-9]')),
+              LengthLimitingTextInputFormatter(10), // PAN card is always 10 characters
+            ],   ),
               ],
             ),
           ),
-          h100,
-          h100,
-          h50,
+         h250,
           h20,
-          CustomElevatedButton(
-            borderRadius: 10,
-            height: 50.h,
-            fontSize: 20.sp,
-            text: 'Continue',
-            onPressed: () {},
-          ),
+         Obx(() {
+            return panController.isLoading.value
+                ? const Center(child: CircularProgressIndicator())
+                : CustomElevatedButton(
+                    borderRadius: 10,
+                    height: 50.h,
+                    fontSize: 20.sp,
+                    text: 'Verify',
+                    onPressed: () {
+                      panController.validateAndSavePanCard(context);
+                    },
+                  );
+          }),
         ],
       ),
     );
