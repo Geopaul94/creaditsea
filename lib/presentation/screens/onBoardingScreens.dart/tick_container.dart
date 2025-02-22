@@ -26,9 +26,8 @@ class _TickContainerScreenState extends State<TickContainerScreen> {
         height: 30.h,
         decoration: BoxDecoration(
           color: isTicked
-              ? const Color.fromARGB(255, 16, 87, 18)
-              : const Color.fromARGB(
-                  255, 36, 139, 40), // Change background color
+              ? const Color.fromARGB(255, 17, 168, 22)
+              : const Color.fromARGB(97, 26, 27, 26), // Change background color
           border: Border.all(
             color: isTicked
                 ? Colors.white

@@ -14,7 +14,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class ONbordingScreenTwo extends StatelessWidget {
-  ONbordingScreenTwo({super.key});
+  final String phonenumber;
+  ONbordingScreenTwo({super.key, required this.phonenumber});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,9 @@ class ONbordingScreenTwo extends StatelessWidget {
                 fontSize: 14.sp,
               ),
               h40,
-              ONbordingScreenTwoContainer(),
+              ONbordingScreenTwoContainer(
+                phonenumber: phonenumber,
+              ),
             ],
           ),
         ),
@@ -61,7 +64,8 @@ class ONbordingScreenTwo extends StatelessWidget {
 }
 
 class ONbordingScreenTwoContainer extends StatelessWidget {
-  ONbordingScreenTwoContainer({super.key});
+  final String phonenumber;
+  ONbordingScreenTwoContainer({super.key, required this.phonenumber});
 
   final OtpController otpController = Get.put(OtpController());
 
@@ -127,7 +131,7 @@ class ONbordingScreenTwoContainer extends StatelessWidget {
                 ),
                 h10,
                 CustomText(
-                  text: "Verify OTP, Sent on  +91 8800642354",
+                  text: "Verify OTP, Sent on  +91 ${phonenumber}",
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
                 ),
@@ -137,11 +141,10 @@ class ONbordingScreenTwoContainer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       OtpInput(otpController.fieldOne, true),
-                      w20,
                       OtpInput(otpController.fieldTwo, false),
-                      w20,
                       OtpInput(otpController.fieldThree, false),
-                      w20,
+                      OtpInput(otpController.fieldFour, false),
+                      OtpInput(otpController.fieldThree, false),
                       OtpInput(otpController.fieldFour, false),
                     ],
                   ),

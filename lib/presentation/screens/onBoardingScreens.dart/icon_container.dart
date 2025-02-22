@@ -35,7 +35,7 @@ class Iconcontainer extends StatelessWidget {
           ],
         ),
         h20,
-        Row(
+        Row(mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
                 decoration: BoxDecoration(

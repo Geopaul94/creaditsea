@@ -1,3 +1,4 @@
+import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 // class CustomElevatedButton extends StatelessWidget {
@@ -128,8 +129,8 @@ class CustomElevatedButton extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [
-              Color.fromARGB(255, 75, 146, 226),
-              Color.fromARGB(195, 40, 116, 202)
+            PrimaryColor,
+             PrimaryColor
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
