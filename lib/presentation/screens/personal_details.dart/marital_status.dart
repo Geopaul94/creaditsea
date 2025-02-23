@@ -6,10 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart'; // Assuming you're using ScreenUtil for responsive design
+// Assuming you're using ScreenUtil for responsive design
 
 class MaritalController extends GetxController {
   var selectedMaritalStatus = ''.obs; // Observable string for marital status

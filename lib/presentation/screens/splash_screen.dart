@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:creditsea/presentation/screens/onboarding_screen_two/signin_screen.dart';
+import 'package:creditsea/presentation/screens/signin_screen/signin_screen.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
 import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +14,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
-
 
     // Delay of 2 seconds before navigating to another screen
     Timer(Duration(seconds: 2), () {
@@ -31,9 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(builder: (context) => SigninScreen()),
       );
     });
-  
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,5 @@
-import 'package:creditsea/presentation/getx/user_controller.dart';
-import 'package:creditsea/presentation/screens/onboarding_screen_two/onBoarding_page_three.dart';
+import 'package:creditsea/presentation/getx/signup_controller/user_controller.dart';
+import 'package:creditsea/presentation/screens/onboarding_screen_three/onBoarding_page_three.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,12 +1,5 @@
 
 import 'package:creditsea/firebase_options.dart';
-import 'package:creditsea/presentation/screens/applay_loan/applay_loan.dart';
-import 'package:creditsea/presentation/screens/onboarding_screen_two/signin_screen.dart';
-import 'package:creditsea/presentation/screens/our_offering.dart';
-import 'package:creditsea/presentation/screens/pan_number/pan_number_verificarion.dart';
-import 'package:creditsea/presentation/screens/personal_details.dart/application_status.dart';
-import 'package:creditsea/presentation/screens/personal_details.dart/email_verification_screen.dart';
-import 'package:creditsea/presentation/screens/personal_details.dart/personal_details.dart';
 import 'package:creditsea/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
