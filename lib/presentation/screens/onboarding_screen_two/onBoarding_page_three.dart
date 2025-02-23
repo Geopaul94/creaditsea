@@ -50,7 +50,8 @@ class ONbordingScreenThree extends StatelessWidget {
                 fontWeight: FontWeight.w300,
                 fontSize: 14.sp,
               ),
-              h40,
+        h20,
+          ThreeDotShape(index: 2),h20,
               ONbordingScreenThreeContainer(
                 phoneNumber: phoneNumber,
               ),

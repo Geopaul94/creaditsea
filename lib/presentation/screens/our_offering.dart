@@ -1,4 +1,5 @@
 import 'package:creditsea/presentation/screens/pan_number/register_headline.dart';
+import 'package:creditsea/presentation/screens/personal_details.dart/application_status.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class OurOfferingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: white,
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
@@ -48,7 +49,9 @@ class OurOfferingScreen extends StatelessWidget {
             h50,
             CustomElevatedButton(
               text: 'Accept Offer',fontSize: 18,height: 60,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ApplicationStatusScreen(),));
+              },
             ),
             h20,
             CustomElevatedButtonTwo(

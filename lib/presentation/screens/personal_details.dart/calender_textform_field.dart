@@ -27,7 +27,7 @@ class CalendarTextField extends StatelessWidget {
             datePickerController.selectDate(context);
           },
           decoration: InputDecoration(
-            labelText: datePickerController.selectedDate.value.isNotEmpty
+            hintText: datePickerController.selectedDate.value.isNotEmpty
                 ? datePickerController.selectedDate.value
                 : 'Select Date of Birth',
             suffixIcon: const Icon(Icons.calendar_today),

@@ -42,16 +42,18 @@ class CustomGenderFormField extends StatelessWidget {
           builder: (controller) {
             return Padding(
               padding: const EdgeInsets.only(right: 16.0),
-              child: Text(
-                controller.selectedGender.value.isNotEmpty
-                    ? controller.selectedGender.value
-                    : 'Select your Gender',
-                style: TextStyle(
-                  color: controller.selectedGender.value.isNotEmpty
-                      ? Colors.black
-                      : Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
+              child: Center(
+                child: Text(
+                  controller.selectedGender.value.isNotEmpty
+                      ? controller.selectedGender.value
+                      : 'Select your Gender',
+                  style: TextStyle(
+                    color: controller.selectedGender.value.isNotEmpty
+                        ? Colors.black
+                        : Colors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             );

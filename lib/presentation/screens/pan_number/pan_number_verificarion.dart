@@ -14,7 +14,7 @@ class PanNumberVerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: white,
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
@@ -52,9 +52,9 @@ class PanNumberVerificationScreenContainer extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
-            offset: const Offset(0, 5),
+            offset: const Offset(0, 1),
             blurRadius: 10,
-            spreadRadius: 1,
+            spreadRadius: 2,
           ),
         ],
       ),

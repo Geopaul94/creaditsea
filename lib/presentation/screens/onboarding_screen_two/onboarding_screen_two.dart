@@ -47,8 +47,10 @@ class ONbordingScreenTwo extends StatelessWidget {
                 color: white,
                 fontWeight: FontWeight.w300,
                 fontSize: 14.sp,
-              ),
-              h40,
+              ),  h20, 
+          ThreeDotShape(index: 1), // Square at index 1
+        
+              h20,
               ONbordingScreenTwoContainer(
                 phonenumber: phonenumber,
               ),

@@ -109,7 +109,7 @@ const w40 = SizedBox(width: 40);
 
 const w50 = SizedBox(width: 50);
 
-const w60 = SizedBox(width: 60);
+const w60 = SizedBox(width: 60);const w80 = SizedBox(width: 80);
 
 const w100 = SizedBox(width: 100);
 

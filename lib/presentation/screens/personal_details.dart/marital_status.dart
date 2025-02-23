@@ -19,12 +19,6 @@ class MaritalController extends GetxController {
   }
 }
 
-
-
-
-
-
-
 class CustomMaritalFormField extends StatelessWidget {
   final MaritalController maritalController = Get.find<MaritalController>();
 
@@ -38,7 +32,7 @@ class CustomMaritalFormField extends StatelessWidget {
             _showMaritalSelection(context);
           },
           decoration: InputDecoration(
-            labelText: maritalController.selectedMaritalStatus.value.isNotEmpty
+            hintText: maritalController.selectedMaritalStatus.value.isNotEmpty
                 ? maritalController.selectedMaritalStatus.value
                 : 'Select Marital Status',
             labelStyle: TextStyle(

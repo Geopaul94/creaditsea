@@ -9,7 +9,7 @@ class TickContainerScreen extends StatefulWidget {
 }
 
 class _TickContainerScreenState extends State<TickContainerScreen> {
-  bool isTicked = false;
+  bool isTicked = true;
 
   void _toggleTick() {
     setState(() {

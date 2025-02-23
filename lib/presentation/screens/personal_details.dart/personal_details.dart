@@ -9,6 +9,7 @@ import 'package:creditsea/presentation/widgets/CustomText.dart';
 import 'package:creditsea/presentation/widgets/custometextformfield.dart';
 import 'package:creditsea/utility/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -42,7 +43,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -52,10 +53,10 @@ class _PersonalDetailsState extends State<PersonalDetails> {
               else
                 Column(
                   children: [
-                      h60,
-            RegisterHeadline(),
-            h30,
-                    h50,
+                    h60,
+                    RegisterHeadline(),
+                    h30,
+             
                     PersonalDetailsContainer(),
                   ],
                 ),
@@ -66,6 +67,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
     );
   }
 }
+
 class PersonalDetailsContainer extends StatelessWidget {
   PersonalDetailsContainer({super.key});
 
@@ -96,9 +98,9 @@ class PersonalDetailsContainer extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
-            offset: const Offset(0, 5),
+            offset: const Offset(0, 1),
             blurRadius: 10,
-            spreadRadius: 1,
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -199,8 +201,6 @@ class PersonalDetailsContainer extends StatelessWidget {
   }
 }
 
-
-
 class ShimmerEffect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -209,21 +209,114 @@ class ShimmerEffect extends StatelessWidget {
       highlightColor: Colors.grey[100]!,
       child: Column(
         children: [
-          Container(
-            height: 20,
-            width: double.infinity,
-            color: Colors.white,
+          Row(
+            children: [
+              Expanded(
+                // Use Expanded to constrain the width
+                child: Container(
+                  height: 20,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 10),
           Container(
             height: 20,
-            width: double.infinity,
+            width: 200, // Use a fixed width instead of 200.w
             color: Colors.white,
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                // Use Expanded to constrain the width
+                child: Container(
+                  height: 30,
+                  color: Colors.white,
+                ),
+              ),
+              Expanded(
+                // Use Expanded to constrain the width
+                child: Container(
+                  height: 30,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(
+                // Use Expanded to constrain the width
+                child: Container(
+                  height: 40,
+                  color: Colors.white,
+                ),
+              ),
+              Expanded(
+                // Use Expanded to constrain the width
+                child: Container(
+                  height: 40,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 10),
           Container(
             height: 20,
-            width: double.infinity,
+            width: double.infinity, // This is fine as it is
+            color: Colors.white,
+          ),
+          Row(
+            children: [
+              Expanded(
+                // Use Expanded to constrain the width
+                child: Container(
+                  height: 40,
+                  color: Colors.white,
+                ),
+              ),
+              Expanded(
+                // Use Expanded to constrain the width
+                child: Container(
+                  height: 40,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Container(
+            height: 20,
+            width: double.infinity, // This is fine as it is
+            color: Colors.white,
+          ),
+          Row(
+            children: [
+              Expanded(
+                // Use Expanded to constrain the width
+                child: Container(
+                  height: 40,
+                  color: Colors.white,
+                ),
+              ),
+              Expanded(
+                // Use Expanded to constrain the width
+                child: Container(
+                  height: 40,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 200), // Adjusted spacing
+          Container(
+            height: 40,
+            width: double.infinity, // This is fine as it is
             color: Colors.white,
           ),
         ],
