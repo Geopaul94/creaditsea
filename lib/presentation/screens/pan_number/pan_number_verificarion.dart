@@ -1,4 +1,5 @@
 import 'package:creditsea/presentation/getx/panNumber_controller.dart';
+import 'package:creditsea/presentation/screens/pan_number/register_headline.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
 import 'package:creditsea/presentation/widgets/custometextformfield.dart';
@@ -18,10 +19,10 @@ class PanNumberVerificationScreen extends StatelessWidget {
           child: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              children: [CustomText(text: 'text')],
-            ),
-            h50,
+            h40,
+            w10,
+            RegisterHeadline(),
+            h30,
             PanNumberVerificationScreenContainer()
           ],
         ),
@@ -30,8 +31,9 @@ class PanNumberVerificationScreen extends StatelessWidget {
   }
 }
 
+
 class PanNumberVerificationScreenContainer extends StatelessWidget {
-   PanNumberVerificationScreenContainer({super.key});
+  PanNumberVerificationScreenContainer({super.key});
 
   final PannumberController panController = Get.put(PannumberController());
 
@@ -97,17 +99,18 @@ class PanNumberVerificationScreenContainer extends StatelessWidget {
                 h20,
                 CustomTextFormField(
                   labelText: 'Enter your PanNumber ID',
-               controller: panController.panNumberController,
-               inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'[A-Z0-9]')),
-              LengthLimitingTextInputFormatter(10), // PAN card is always 10 characters
-            ],   ),
+                  controller: panController.panNumberController,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[A-Z0-9]')),
+                    LengthLimitingTextInputFormatter(
+                        10), // PAN card is always 10 characters
+                  ],
+                ),
               ],
             ),
           ),
-         h250,
-          h20,
-         Obx(() {
+          h200,
+          Obx(() {
             return panController.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
                 : CustomElevatedButton(
@@ -125,9 +128,3 @@ class PanNumberVerificationScreenContainer extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-

@@ -2,6 +2,7 @@ import 'package:creditsea/presentation/getx/email_controller.dart';
 import 'package:creditsea/presentation/getx/emailotp_controller.dart';
 import 'package:creditsea/presentation/getx/otp_timer/otpcontroller.dart';
 import 'package:creditsea/presentation/screens/onboarding_screen_two/onboarding_screen_two.dart';
+import 'package:creditsea/presentation/screens/pan_number/register_headline.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/personal_details.dart';
 import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
@@ -22,10 +23,9 @@ class EmailVerificationScreen extends StatelessWidget {
           child: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              children: [CustomText(text: 'text')],
-            ),
-            h50,
+            h60,
+            RegisterHeadline(),
+            h30,
             EmailVerificationScreenContainer()
           ],
         ),

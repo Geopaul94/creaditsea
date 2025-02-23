@@ -1,5 +1,5 @@
 import 'package:creditsea/presentation/getx/personlaDetailController.dart';
-import 'package:creditsea/presentation/sample/s.dart';
+import 'package:creditsea/presentation/screens/pan_number/register_headline.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/calender_textform_field.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/date_picker_controller.dart';
 import 'package:creditsea/presentation/screens/personal_details.dart/gender_select_controller.dart';
@@ -8,39 +8,64 @@ import 'package:creditsea/presentation/widgets/CustomElevatedButton.dart';
 import 'package:creditsea/presentation/widgets/CustomText.dart';
 import 'package:creditsea/presentation/widgets/custometextformfield.dart';
 import 'package:creditsea/utility/constants/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 String SignInPhoneNumber = '';
 
-class PersonalDetails extends StatelessWidget {
+class PersonalDetails extends StatefulWidget {
   final String phoneNumber;
+
   const PersonalDetails({super.key, required this.phoneNumber});
 
   @override
+  State<PersonalDetails> createState() => _PersonalDetailsState();
+}
+
+class _PersonalDetailsState extends State<PersonalDetails> {
+  bool isLoading = true; // Controls whether to show the shimmer effect
+
+  @override
+  void initState() {
+    super.initState();
+    // Set SignInPhoneNumber globally
+    SignInPhoneNumber = widget.phoneNumber;
+
+    // Simulate a delay of 1.5 seconds
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      setState(() {
+        isLoading = false; // Stop showing the shimmer effect
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    SignInPhoneNumber = phoneNumber;
     return Scaffold(
       body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [CustomText(text: 'text')],
-            ),
-            h50,
-            PersonalDetailsContainer()
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              if (isLoading)
+                ShimmerEffect() // Show shimmer effect while loading
+              else
+                Column(
+                  children: [
+                      h60,
+            RegisterHeadline(),
+            h30,
+                    h50,
+                    PersonalDetailsContainer(),
+                  ],
+                ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
-
 class PersonalDetailsContainer extends StatelessWidget {
   PersonalDetailsContainer({super.key});
 
@@ -168,6 +193,39 @@ class PersonalDetailsContainer extends StatelessWidget {
                   );
           }),
           h150,
+        ],
+      ),
+    );
+  }
+}
+
+
+
+class ShimmerEffect extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Column(
+        children: [
+          Container(
+            height: 20,
+            width: double.infinity,
+            color: Colors.white,
+          ),
+          const SizedBox(height: 10),
+          Container(
+            height: 20,
+            width: double.infinity,
+            color: Colors.white,
+          ),
+          const SizedBox(height: 10),
+          Container(
+            height: 20,
+            width: double.infinity,
+            color: Colors.white,
+          ),
         ],
       ),
     );

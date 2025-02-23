@@ -1,12 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:creditsea/presentation/getx/user_controller.dart';
-import 'package:creditsea/presentation/screens/applay_loan/applay_loan.dart';
 import 'package:creditsea/presentation/screens/pan_number/pan_number_verificarion.dart';
-import 'package:creditsea/presentation/screens/personal_details.dart/date_picker_controller.dart';
-import 'package:creditsea/presentation/screens/personal_details.dart/email_verification_screen.dart';
-import 'package:creditsea/presentation/screens/personal_details.dart/gender_select_controller.dart';
-import 'package:creditsea/presentation/screens/personal_details.dart/marital_status.dart';
-import 'package:creditsea/presentation/screens/personal_details.dart/personal_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

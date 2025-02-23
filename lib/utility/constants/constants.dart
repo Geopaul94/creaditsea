@@ -89,12 +89,12 @@ const h16 = SizedBox(height: 16.0);
 const h15 = SizedBox(height: 15);
 
 const h50 = SizedBox(height: 50);
-
+const h60 = SizedBox(height: 60);
 const h80 = SizedBox(height: 80);
 
 const h100 = SizedBox(height: 100);
 const h150 = SizedBox(height: 150);
-const h250 = SizedBox(height: 250);
+const h200 = SizedBox(height: 200);
 
 // SizedBox for widths
 const w5 = SizedBox(width: 5);
